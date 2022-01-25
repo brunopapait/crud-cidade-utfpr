@@ -38,46 +38,18 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Londrina</td>
-            <td>Paraná</td>
-            <td>
-                <div class="d-flex d-justify-content-center">
-                    <a class="btn btn-warning mr-3">ALTERAR</a>
-                    <a class="btn btn-danger">EXCLUIR</a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>Maringá</td>
-            <td>Paraná</td>
-            <td>
-                <div class="d-flex d-justify-content-center">
-                    <a class="btn btn-warning mr-3">ALTERAR</a>
-                    <a class="btn btn-danger">EXCLUIR</a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>Aracaju</td>
-            <td>Sergipe</td>
-            <td>
-                <div class="d-flex d-justify-content-center">
-                    <a class="btn btn-warning mr-3">ALTERAR</a>
-                    <a class="btn btn-danger">EXCLUIR</a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>Araruna</td>
-            <td>Paraná</td>
-            <td>
-                <div class="d-flex d-justify-content-center">
-                    <a class="btn btn-warning mr-3">ALTERAR</a>
-                    <a class="btn btn-danger">EXCLUIR</a>
-                </div>
-            </td>
-        </tr>
+        <#list listaCidades as cidade>
+            <tr>
+                <td>${cidade.nomeCidade}</td>
+                <td>${cidade.nomeEstado}</td>
+                <td>
+                    <div class="d-flex d-justify-content-center">
+                        <a class="btn btn-warning mr-3">ALTERAR</a>
+                        <a class="btn btn-danger">EXCLUIR</a>
+                    </div>
+                </td>
+            </tr>
+        </#list>
         </tbody>
     </table>
 </div>
