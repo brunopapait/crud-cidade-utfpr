@@ -18,7 +18,7 @@ public class CrudCidadeUtfprApplication {
   @Bean
   public MessageSource messageSource() {
     ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource = new ReloadableResourceBundleMessageSource();
-    reloadableResourceBundleMessageSource.setBasename("classpath:messages");
+    reloadableResourceBundleMessageSource.setBasename("classpath:message");
     reloadableResourceBundleMessageSource.setDefaultEncoding("UTF-8");
 
     return reloadableResourceBundleMessageSource;

@@ -2,10 +2,12 @@ package br.com.papait.bruno.crudcidadeutfpr.view;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,9 +24,24 @@ public class CidadeController {
   }
 
   @PostMapping("/criar")
-  public String criar(Cidade cidade) {
-    cidades.add(cidade);
-    return "redirect:/";
+  public String criar(@Valid Cidade cidade, BindingResult bindingResult, Model memoria) {
+
+    if (bindingResult.hasErrors()) {
+      bindingResult
+              .getFieldErrors()
+              .forEach(error ->
+                      memoria.addAttribute(
+                              error.getField(), error.getDefaultMessage()));
+
+      memoria.addAttribute("nomeCidadeInformado", cidade.getNomeCidade());
+      memoria.addAttribute("nomeEstadoInformado", cidade.getNomeEstado());
+      memoria.addAttribute("listaCidades", cidades);
+
+      return "/crud";
+    } else {
+      cidades.add(cidade);
+      return "redirect:/";
+    }
   }
 
   @GetMapping("/excluir")
@@ -60,12 +77,14 @@ public class CidadeController {
   public String alterar(
           @RequestParam String nomeCidadeAtual,
           @RequestParam String nomeEstadoAtual,
-          Cidade cidade
+          Cidade cidade,
+          BindingResult bindingResult,
+          Model memoria
   ) {
 
     cidades
             .removeIf(cidadeAux -> cidadeAux.getNomeCidade().equals(nomeCidadeAtual) && cidadeAux.getNomeEstado().equals(nomeEstadoAtual));
 
-    return criar(cidade);
+    return criar(cidade, bindingResult, memoria);
   }
 }

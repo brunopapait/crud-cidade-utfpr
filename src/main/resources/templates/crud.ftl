@@ -17,23 +17,39 @@
     <p>UM CRUD PARA CRIAR, ALTERAR, EXCLUIR E LISTAR CIDADES</p>
   </div>
     <#if cidadeAtual??>
-  <form action="/alterar" method="POST">
+  <form action="/alterar" method="POST" class="needs-validation" novalidate>
     <input type="hidden" name="nomeCidadeAtual" value="${(cidadeAtual.nomeCidade)!}"/>
     <input type="hidden" name="nomeEstadoAtual" value="${(cidadeAtual.nomeEstado)!}"/>
       <#else>
-    <form action="/criar" method="POST">
+    <form action="/criar" method="POST" class="needs-validation" novalidate>
         </#if>
 
       <div class="form-group">
         <label for="nome">Cidade:</label>
-        <input value="${(cidadeAtual.nomeCidade)!}" name="nomeCidade" type="text" class="form-control"
-               placeholder="Informe o nome da cidade" id="nome">
+        <input
+                value="${(cidadeAtual.nomeCidade)!}${nomeCidadeInformado!}"
+                name="nomeCidade" type="text"
+                class="form-control ${(nomeCidade??)?then('is-invalid', '')}"
+                placeholder="Informe o nome da cidade"
+                id="nomeCidade">
+
+        <div class="invalid-feedback">
+            ${nomeCidade!}
+        </div>
       </div>
       <div class="form-group">
         <label for="estado">Estado:</label>
-        <input value="${(cidadeAtual.nomeEstado)!}" name="nomeEstado" type="text" class="form-control"
-               placeholder="Informe o estado ao qual a cidade pertence"
-               id="estado">
+        <input
+                value="${(cidadeAtual.nomeEstado)!}${nomeEstadoInformado!}"
+                name="nomeEstado"
+                type="text"
+                class="form-control ${(nomeEstado??)?then('is-invalid', '')}"
+                placeholder="Informe o estado ao qual a cidade pertence"
+                id="nomeEstado">
+
+        <div class="invalid-feedback">
+            ${nomeEstado!}
+        </div>
       </div>
         <#if cidadeAtual??>
           <button type="submit" class="btn btn-warning">CONCLUIR ALTERAÇÃO</button>
