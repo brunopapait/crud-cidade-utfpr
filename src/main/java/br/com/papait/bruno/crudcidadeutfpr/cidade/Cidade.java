@@ -1,4 +1,4 @@
-package br.com.papait.bruno.crudcidadeutfpr.view;
+package br.com.papait.bruno.crudcidadeutfpr.cidade;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -25,5 +25,18 @@ public final class Cidade {
 
   public String getNomeEstado() {
     return nomeEstado;
+  }
+
+  public CidadeEntidade clonar() {
+    var cidadeEntidade = new CidadeEntidade();
+
+    cidadeEntidade.setNomeCidade(this.getNomeCidade());
+    cidadeEntidade.setNomeEstado(this.getNomeEstado());
+
+    return cidadeEntidade;
+  }
+
+  public Cidade clonar(CidadeEntidade cidadeEntidade) {
+    return new Cidade(cidadeEntidade.getNomeCidade(), cidadeEntidade.getNomeEstado());
   }
 }
