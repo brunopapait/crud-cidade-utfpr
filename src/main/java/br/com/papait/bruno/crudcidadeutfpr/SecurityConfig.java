@@ -32,6 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .hasAnyAuthority("admin")
             .antMatchers("/alterar")
             .hasAnyAuthority("admin")
+            .antMatchers("/mostrarValorCookie")
+            .authenticated()
             .anyRequest()
             .denyAll()
             .and()
